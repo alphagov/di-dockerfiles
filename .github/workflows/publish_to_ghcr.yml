@@ -17,11 +17,7 @@ on:
         required: false
         default: ""
         type: string
-    secrets:
-      ghcr_username:
-        required: false
-      ghcr_token:
-        required: false
+
 
 permissions:
   contents: read
@@ -43,8 +39,8 @@ jobs:
         if: ${{ inputs.push_to_ghcr }}
         with:
           registry: ghcr.io
-          username: ${{ secrets.ghcr_username }}
-          password: ${{ secrets.ghcr_token }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
       - name: Construct tags string
         id: tags
         run: |
