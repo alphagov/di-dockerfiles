@@ -22,6 +22,4 @@ jobs:
       push_to_ghcr: true
       ghcr_repo: ghcr.io/alphagov/aws-sam
       image_tag: ${{ github.event.inputs.image_tag }}
-    secrets:
-      ghcr_username: ${{ secrets.GHCR_USERNAME }}
-      ghcr_token: ${{ secrets.CHCR_TOKEN }}
+
