@@ -16,7 +16,7 @@ on:
 
 jobs:
   build-and-push:
-    uses: alphagov/di-dockerfiles/.github/workflows/publish_to_ghcr.yml@master
+    uses: alphagov/di-dockerfiles/.github/workflows/publish_to_ghcr.yml@main
     with:
       docker_context: ./aws-sam
       push_to_ghcr: true
