@@ -5,7 +5,7 @@ on:
     branches:
       - 'main'
     paths:
-      - 'aws-sam/**'
+      - 'aws-sam/*'
 
   workflow_dispatch:
     inputs:
