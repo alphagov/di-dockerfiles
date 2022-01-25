@@ -9,7 +9,7 @@ on:
       - '.github/workflows/build_gradle_sam.yml'
   registry_package:
     types:
-      - 'published'
+      - 'updated'
 
   workflow_dispatch:
     inputs:
