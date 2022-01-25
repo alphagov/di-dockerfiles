@@ -6,6 +6,7 @@ on:
       - 'main'
     paths:
       - 'aws-sam/*'
+      - '.github/workflows/build_aws_sam.yml'
 
   workflow_dispatch:
     inputs:
