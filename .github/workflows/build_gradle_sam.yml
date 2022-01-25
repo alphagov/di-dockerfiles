@@ -1,12 +1,15 @@
-name: di-aws-sam
+name: di-gradle-sam
 
 on:
   push:
     branches:
       - 'main'
     paths:
-      - 'aws-sam/*'
-      - '.github/workflows/build_aws_sam.yml'
+      - 'gradle-sam/*'
+      - '.github/workflows/build_gradle_sam.yml'
+  registry_package:
+    types:
+      - 'published'
 
   workflow_dispatch:
     inputs:
@@ -17,10 +20,11 @@ on:
 
 jobs:
   build-and-push:
+    if: github.event.type != 'package' || github.event.registry_package.package.name == 'aws-sam'
     uses: alphagov/di-dockerfiles/.github/workflows/publish_to_ghcr.yml@main
     with:
-      docker_context: ./aws-sam
+      docker_context: ./gradle-sam
       push_to_ghcr: true
-      ghcr_repo: ghcr.io/alphagov/aws-sam
+      ghcr_repo: ghcr.io/alphagov/gradle-sam
       image_tag: ${{ github.event.inputs.image_tag }}
 
