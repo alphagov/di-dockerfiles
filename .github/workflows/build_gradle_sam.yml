@@ -1,0 +1,26 @@
+name: di-gradle-sam
+
+on:
+  push:
+    branches:
+      - 'main'
+    paths:
+      - 'aws-sam/*'
+      - 'gradle-sam/*'
+
+  workflow_dispatch:
+    inputs:
+      image_tag:
+        description: "Tag used within docker repository to mark as unique"
+        required: false
+        type: string
+
+jobs:
+  build-and-push:
+    uses: alphagov/di-dockerfiles/.github/workflows/publish_to_ghcr.yml@main
+    with:
+      docker_context: ./gradle-sam
+      push_to_ghcr: true
+      ghcr_repo: ghcr.io/alphagov/gradle-sam
+      image_tag: ${{ github.event.inputs.image_tag }}
+
