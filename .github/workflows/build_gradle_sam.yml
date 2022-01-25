@@ -9,7 +9,7 @@ on:
       - '.github/workflows/build_gradle_sam.yml'
   registry_package:
     types:
-      - 'updated'
+      - 'published'
 
   workflow_dispatch:
     inputs:
@@ -20,7 +20,7 @@ on:
 
 jobs:
   build-and-push:
-    if: github.event.registry_package.package.name == 'aws-sam'
+    if: github.event.type != package || github.event.registry_package.package.name == 'aws-sam'
     uses: alphagov/di-dockerfiles/.github/workflows/publish_to_ghcr.yml@main
     with:
       docker_context: ./gradle-sam
