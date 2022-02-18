@@ -1,0 +1,28 @@
+name: di-aws-cli
+
+on:
+  push:
+    branches:
+      - 'main'
+    paths:
+      - 'aws-cli/*'
+      - '.github/workflows/build_aws_cli.yml'
+
+  workflow_dispatch:
+    inputs:
+      image_tag:
+        description: "Tag used within docker repository to mark as unique"
+        required: false
+        type: string
+
+jobs:
+  build-and-push:
+    uses: alphagov/di-dockerfiles/.github/workflows/publish_to_ghcr.yml@main
+    permissions:
+      contents: read
+      packages: write
+    with:
+      docker_context: ./aws-cli
+      push_to_ghcr: true
+      ghcr_repo: ghcr.io/alphagov/aws-cli
+      image_tag: ${{ github.event.inputs.image_tag }}
