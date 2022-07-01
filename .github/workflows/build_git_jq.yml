@@ -1,0 +1,29 @@
+name: di-git-jq
+
+on:
+  push:
+    branches:
+      - 'bau-add-git-jq'
+    paths:
+      - 'git-jq/*'
+      - '.github/workflows/build_git_jq.yml'
+
+  workflow_dispatch:
+    inputs:
+      image_tag:
+        description: "Tag used within docker repository to mark as unique"
+        required: false
+        type: string
+
+jobs:
+  build-and-push:
+    uses: alphagov/di-dockerfiles/.github/workflows/publish_to_ghcr.yml@main
+    permissions:
+      contents: read
+      packages: write
+    with:
+      docker_context: ./git-jq
+      push_to_ghcr: true
+      ghcr_repo: ghcr.io/alphagov/git-jq
+      image_tag: ${{ github.event.inputs.image_tag }}
+
