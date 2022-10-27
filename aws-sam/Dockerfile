@@ -1,4 +1,4 @@
-FROM python:3.10-alpine3.15
+FROM python:3.12.0a1-alpine3.15
 
 ENV PACKAGES "jq gettext"
 
